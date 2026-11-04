@@ -43,3 +43,9 @@ OPEN_LOCKED_YEAR=yes node analyze.mjs --period locked   # refuses to run twice: 
 
 ## Next
 The range simulation (filtered historical simulation using this HAR forecast, unchanged) will be pre-registered and scored on forward data from a logger, because the locked year can no longer give a clean coverage test. See `IMPLEMENTATION-NOTES.md` and `variant-log.md`.
+
+## Exploratory addendum: the trend rule against random timing (2026-11-04)
+Not pre-registered, no pass mark, data already seen. The site's trend rule was compared with 1,000 random in/out schedules that have the same number of days in the market and the same number of entries.
+- **6 coins, old 5-year data:** the rule's return beat a median of 68% of random schedules (0 of 6 coins at 95% or better; 4 of 6 above half); its drawdown was smaller than random in a median of 74% of cases.
+- **30 Coinbase coins, 2023-11 to 2026-11:** a median of 34% (0 of 30 coins at 95% or better; 10 of 30 above half), and a deeper drawdown than random in most coins (median 28%).
+- **Reading:** there is no evidence that "Trend up / down" carries timing information beyond what holding less often already gives, and in the recent three years it did worse than random timing for most coins. This matches the site's wording. It does not change any claim; a claim that the trend predicts anything would need its own forward pre-registration.

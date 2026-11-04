@@ -56,3 +56,9 @@ Code corrections made before the locked year was opened (not new strategies):
 - code-v1.4: the spike rule's Kraken median now needs at least 24 of the previous 30 days. Found in the first development run (code-v1.3, commit a219e74): 6 days at the very start of Kraken's data were voided although Kraken confirmed the moves. Fixes the code to match the pre-registered rule; affects only the early development period. Second development run: commit ac96837.
 
 The "new variant" rule applies to any change made after the locked year is opened.
+
+## Exploratory (not pre-registered, no pass mark)
+
+| # | Variant | Status |
+| --- | --- | --- |
+| X1 | Trend rule (enter on "up", leave on "down", 0.2% per change) vs 1,000 random in/out schedules with the same days in market and the same number of entries, seed 19. 6 coins on the old 5-year backtest data and the 30 Coinbase coins (2023-11 to 2026-11). `exploratory/trend-vs-random-timing.mjs`, results in `exploratory/trend-vs-random-timing-results.txt` | exploratory, run 2026-11-04, data already seen |

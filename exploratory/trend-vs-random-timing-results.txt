@@ -1,0 +1,50 @@
+EXPLORATORY: trend rule (enter on up, leave on down, 0.2% per change) vs 1,000 random schedules with the same days in market and the same number of entries. Seed 19. No pass mark; descriptive only.
+Percentile of return = share of random schedules the rule beat. Percentile of drawdown = share of random schedules with a deeper drawdown than the rule (higher is better for the rule).
+
+== 6 coins, old 5-year backtest data ==
+coin   days  in-mkt  rule     hold     random-median  pct(return)  rule-DD  random-DD  pct(DD)
+BTC     1892    52%      65%      66%           22%         69%      48%        60%     85%
+ETH     1892    45%      54%     -31%          -19%         79%      43%        72%    100%
+SOL     1749    38%     190%     -41%           -1%         81%      51%        77%     95%
+XRP      995    43%      48%     147%           53%         49%      68%        56%     14%
+ADA     1840    31%     -73%     -91%          -52%         27%      80%        75%     35%
+DOGE    1763    34%      19%     -56%          -21%         67%      68%        71%     62%
+median percentile of return across coins: 68%; coins where the rule beat at least 95% of random schedules: 0 of 6; beat at least half: 4 of 6
+median percentile of drawdown across coins: 74%; median in-market share 41%
+
+== 30 Coinbase coins, 2023-11 to 2026-11 ==
+coin   days  in-mkt  rule     hold     random-median  pct(return)  rule-DD  random-DD  pct(DD)
+BTC      895    50%     -13%      12%            7%         29%      37%        41%     65%
+ETH      895    36%     -26%     -39%          -13%         39%      40%        56%     88%
+SOL      895    42%     -34%     -48%          -20%         37%      44%        61%     91%
+XRP      895    43%      61%     142%           53%         52%      67%        55%     14%
+DOGE     895    30%     -18%     -55%          -23%         53%      68%        60%     28%
+LINK     895    32%       9%     -33%          -10%         62%      55%        58%     60%
+SUI      895    32%      -2%     -19%           -9%         54%      69%        65%     41%
+ADA      895    32%     -64%     -61%          -32%         14%      80%        64%      6%
+HBAR     895    29%     -45%     -39%          -18%         32%      74%        59%     10%
+AVAX     895    26%     -22%     -79%          -30%         57%      56%        61%     59%
+ZEC      895    64%    1128%    4824%         1285%         46%      67%        68%     51%
+LTC      895    36%     -33%     -37%          -13%         28%      58%        51%     27%
+XLM      895    37%      11%      46%            9%         51%      80%        58%      2%
+CRO      895    22%     -43%     -60%          -14%         28%      65%        55%     28%
+AAVE     895    49%      49%      34%            7%         68%      54%        72%     96%
+DOT      895    17%     -48%     -87%          -31%         26%      75%        51%      2%
+ARB      895    23%     -37%     -86%          -39%         53%      65%        67%     53%
+SEI      895    23%     -48%     -91%          -39%         42%      62%        66%     57%
+BCH      895    44%     -56%     -45%          -20%         15%      58%        58%     51%
+CRV      895    32%     -31%     -44%          -10%         39%      81%        67%      8%
+SHIB     895    21%     -53%     -82%          -30%         14%      57%        50%     30%
+UNI      895    37%      18%     -22%          -19%         68%      63%        70%     70%
+FET      895    15%     -76%     -94%          -32%          3%      76%        56%      8%
+NEAR     895    37%     -58%     -52%          -22%         20%      81%        68%     13%
+DASH     895    37%     -52%      50%           27%         10%      90%        67%      1%
+ICP      895    19%     -72%     -81%          -26%          3%      83%        56%      1%
+INJ      895    31%     -59%     -73%          -33%         26%      80%        69%     20%
+ALGO     895    28%     -62%     -50%          -19%         13%      82%        60%      1%
+XCN      895    32%     450%      73%          -11%         81%      77%        71%     27%
+LDO      895    25%     -56%     -84%          -38%         31%      70%        66%     41%
+median percentile of return across coins: 34%; coins where the rule beat at least 95% of random schedules: 0 of 30; beat at least half: 10 of 30
+median percentile of drawdown across coins: 28%; median in-market share 32%
+
+Caution: the coins move together, so coins are not independent samples; the data was already seen when the rule was designed; random schedules ignore the order of up and down markets. Do not read this as evidence that the rule predicts anything.
