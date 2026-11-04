@@ -56,4 +56,9 @@ t("spike median ignores zero-range days (a normal 3% day is not flagged because 
   const daily = mk((i) => i >= 30 && i < 60 && i % 3 !== 0), kraken = mk(() => false), s = buildSeries({ daily, kraken }, { start, nDays: n, target: "gk" });
   assert.equal(s.spike[60], false);
 });
+t("diagnostics do not change scoring: stored forecast and realised value reproduce the scored loss", () => {
+  const s = synth(900, 0.95, 11), r = forecastCoin(s, 7, { scoreStart: 0, scoreEnd: 899 }); let k = 0;
+  for (let i = 0; i < 900; i++) if (Number.isFinite(r.lHar[i])) { assert.ok(Math.abs(qlike(r.R[i], r.F[i]) - r.lHar[i]) < 1e-12); k++; }
+  assert.ok(k > 100 && r.coefs.length > 3 && r.coefs[0].b.length === 4);
+});
 console.log(process.exitCode ? "\nSome checks FAILED" : `\nAll ${pass} checks passed`);

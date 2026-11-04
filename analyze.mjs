@@ -22,6 +22,18 @@ const rowsOf = (kind, sym) => { const a = load(`data/dev/${sym}-${kind}.csv.gz`)
 const cache = Object.fromEntries(coins.map((s) => [s, { daily: rowsOf("daily", s), hourly: decision.target === "hourly" ? rowsOf("hourly", s) : null, kraken: load(`data/kraken/${s}-daily.csv.gz`) }]));
 const f = (x, d = 4) => (Number.isFinite(x) ? x.toFixed(d) : "n/a"), lines = [], say = (s = "") => { console.log(s); lines.push(s); };
 
+function diagnostics(per) { // diagnostics only: for bug-finding, never used to judge the result or tune anything
+  say("\nDiagnostics (bug-finding aid; scoring is unchanged). Per coin: HAR improvement over baseline at 1 and 7 days (mean QLIKE), mean forecast / mean realised variance, last-refit HAR coefficients (1-day: const, 1d, 7d, 30d), spike voids and zero-range or missing-hour voids in the scored period.");
+  const rows = [];
+  for (const sym of coins) {
+    const m = (a) => { const v = a.filter(Number.isFinite); return v.length ? v.reduce((x, y) => x + y, 0) / v.length : NaN; }, d = {};
+    for (const h of [1, 7]) { const p = per[h][sym]; d["imp" + h] = 1 - m(p.lHar) / m(p.lBase); d["ratio" + h] = m(p.F) / m(p.R); }
+    const c = per[1][sym].coefs.at(-1), sr = buildSeries(cache[sym], { start: START, nDays, target: decision.target });
+    let sp = 0, zr = 0; for (let i = scoreStart; i <= scoreEnd; i++) { if (sr.structVoid[i]) zr++; else if (sr.spike[i]) sp++; }
+    rows.push({ coin: sym, "1d impr %": f(100 * d.imp1, 1), "7d impr %": f(100 * d.imp7, 1), "F/R 1d": f(d.ratio1, 2), "F/R 7d": f(d.ratio7, 2), coef: c ? c.b.map((x) => f(x, 2)).join(" ") : "n/a", spike: sp, zero: zr });
+  }
+  console.table(rows); lines.push(JSON.stringify(rows));
+}
 function run(title, target, applyVoids, decides) {
   const per = { 1: {}, 7: {} }, res = {}; let spikeVoids = 0, zeroVoids = 0;
   for (const sym of coins) {
@@ -33,6 +45,7 @@ function run(title, target, applyVoids, decides) {
     const r = aggregate(per[h], key); res[`${key}${h}`] = r;
     say(`${label}, ${h}-day: ` + (r ? `${r.days} scored days. QLIKE baseline ${f(r.meanBase)} vs model ${f(r.meanModel)} (improvement ${f(100 * r.improvement, 2)}%). DM t=${f(r.dm.t, 2)}, p=${f(r.dm.p)}. Coins better ${r.coinsBetter}/${r.coinsScored} (${f(100 * r.shareBetter, 0)}%).${key === "lHar" ? " Pass mark " + (horizonPasses(r) ? "MET" : "not met") : ""}` : "no scored days"));
   }
+  if (decides) diagnostics(per);
   if (decides) say(`VERDICT (HAR; improvement >= 3%, DM p < 0.05 with Newey-West lag 6, >= 70% of coins better; 7-day decides): ${verdict(res.lHar1, res.lHar7)}`);
   return res;
 }

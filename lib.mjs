@@ -77,15 +77,15 @@ export function forecastCoin(series, h, cfg) {
   const ew = new Array(n).fill(NaN); let s2e = NaN; for (let i = 0; i < n; i++) { if (!finite(s2e)) { if (finite(m30[i])) s2e = m30[i]; } else if (finite(inp[i])) s2e = lambda * s2e + (1 - lambda) * inp[i]; ew[i] = s2e; }
   const rowsUpTo = (t0) => { const X = [], y = []; for (let i = 0; i + h <= t0; i++) if (f[i] && finite(R[i])) { X.push(f[i]); y.push(Math.log(R[i])); } return { X, y }; };
   let a = anchorIdx; if (a === null) { a = -1; for (let t0 = 0; t0 < n; t0++) if (rowsUpTo(t0).X.length >= minTrain) { a = t0; break; } }
-  const out = { lHar: new Array(n).fill(NaN), lBase: new Array(n).fill(NaN), lEw: new Array(n).fill(NaN) };
+  const out = { lHar: new Array(n).fill(NaN), lBase: new Array(n).fill(NaN), lEw: new Array(n).fill(NaN), F: new Array(n).fill(NaN), R: new Array(n).fill(NaN), coefs: [] }; // F, R and coefs are diagnostics only: scoring does not use them
   if (a < 0) return out;
   for (let t0 = a; t0 < n; t0 += refit) {
-    const { X, y } = rowsUpTo(t0); if (X.length < minTrain) continue; const fit = ols(X, y); if (!fit) continue;
+    const { X, y } = rowsUpTo(t0); if (X.length < minTrain) continue; const fit = ols(X, y); if (!fit) continue; out.coefs.push({ t0, b: fit.b, s2: fit.s2, rows: X.length });
     for (let i = t0; i < Math.min(n, t0 + refit); i++) {
       if (!f[i] || !finite(R[i]) || i + 1 < scoreStart || i + h > scoreEnd) continue;
       const F = Math.exp(fit.b[0] * f[i][0] + fit.b[1] * f[i][1] + fit.b[2] * f[i][2] + fit.b[3] * f[i][3] + 0.5 * fit.s2), base = h * m30[i];
       if (!finite(base)) continue;
-      out.lHar[i] = qlike(R[i], F); out.lBase[i] = qlike(R[i], base); if (finite(ew[i])) out.lEw[i] = qlike(R[i], h * ew[i]);
+      out.F[i] = F; out.R[i] = R[i]; out.lHar[i] = qlike(R[i], F); out.lBase[i] = qlike(R[i], base); if (finite(ew[i])) out.lEw[i] = qlike(R[i], h * ew[i]);
     }
   }
   return out;

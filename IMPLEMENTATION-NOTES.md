@@ -1,4 +1,4 @@
-# Implementation notes (code-v1.2)
+# Implementation notes (code-v1.3)
 
 Where the code interprets preregistration-volatility-v1.0.md. Each item is a reading of the document, not a change to it.
 
@@ -18,3 +18,10 @@ Where the code interprets preregistration-volatility-v1.0.md. Each item is a rea
 14. **Void log.** The analysis reports spike voids and zero-range or missing-hour voids separately, for the scored period only, and spike voids are not counted in the run without the spike rule.
 15. **Ticker-change effect (documented after the preview, before any analysis).** "First daily Coinbase candle" is read literally for the current product. RENDER (was RNDR), POL (was MATIC) and S (was FTM) are excluded because Coinbase's current product starts after 2023-11-03, although the coins have longer history under their old tickers. Joining series across token swaps would be a judgment call the rule exists to avoid, so the rule was kept. The effect is similar to survivorship and is expected to be negligible for a volatility test.
 16. **Fetch outcome.** The full fetch (Action run 41809908288, tag `code-v1.2`) selected the same 30 coins as the preview. Hourly coverage was 0.998, so the target is hourly realised variance for all coins. Kraken daily candles: 720 for 27 coins, 644 for CRO and 482 for HBAR; spikes outside Kraken's data are kept.
+17. **What counts as a bug (written before the development run).** A bug is code that does not do what the pre-registration says. A surprising number is not a bug, and a bad or good result is never a reason to change anything. The development run is read with these checks, which are for finding bugs only and never for judging or tuning the result:
+    - HAR improvement over the baseline of roughly 5-30% is plausible. Above about 50% points to leakage; a negative number points to a broken pipeline.
+    - The ratio of mean forecast to mean realised variance should be close to 1. A ratio outside 0.7-1.4 points to a log-correction or units bug.
+    - Void counts: spike voids should be a handful (well under 1% of coin-days) and zero-range or missing-hour voids close to zero, given 99.8% hourly coverage.
+    - No single coin should dominate the average loss, and the EWMA and Parkinson runs should point the same way as HAR.
+    - A bug found is fixed and logged with its reason before the locked year is opened, and the fix gets a new code tag.
+18. **Diagnostics (code-v1.3).** The analysis prints per-coin improvement, the forecast-to-realised ratio, last-refit HAR coefficients and void counts per coin. Scoring is unchanged; a test checks that the stored forecast and realised value reproduce the scored loss.
