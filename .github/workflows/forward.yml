@@ -26,9 +26,9 @@ jobs:
           fetch-tags: true
       - name: Runner must match the published tag
         env:
-          TAG: forward-v1.1
+          TAG: forward-v2.0
         run: |
-          git diff --quiet "$TAG" HEAD -- forward/runner.mjs forward/q3.mjs forward/test.mjs lib.mjs coins.json .github/workflows/forward.yml || { echo "Runner files differ from $TAG: refusing to run"; exit 1; }
+          git diff --quiet "$TAG" HEAD -- forward/runner.mjs forward/range.mjs forward/q3.mjs forward/test.mjs lib.mjs coins.json .github/workflows/forward.yml || { echo "Runner files differ from $TAG: refusing to run"; exit 1; }
       - uses: actions/setup-node@v4
         with:
           node-version: "22"

@@ -6,7 +6,8 @@ import { gunzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { buildSeries, ols, median, qlike, dayIndex, addDays, aggregate } from "../lib.mjs";
+import { buildSeries, forecastCoin, ols, median, qlike, dayIndex, dateOf, addDays, aggregate } from "../lib.mjs";
+import { RANGE, rangeSeed, pool1, pool7, makeRange, scoreRange } from "./range.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url)), ROOT = join(HERE, ".."), finite = Number.isFinite;
 export const LIB_SHA256 = "5c2a129c88d8ff2df5cedbfe1542d6f3c80b68a9723df4dcc7ef7aa62435e33a"; // lib.mjs at tag code-v1.4
@@ -114,6 +115,8 @@ export function scorecard(fwd, asOf) { // descriptive daily summary; the formal 
     for (const r of s) { const o = (per[r.coin] ||= { lHar: new Array(span).fill(NaN), lBase: new Array(span).fill(NaN), lEw: new Array(span).fill(NaN) }), k = dayIndex(r.t, CFG.START) - d0; o.lHar[k] = r.q_har; o.lBase[k] = r.q_base; o.lEw[k] = r.q_ew ?? NaN; }
     const a = aggregate(per, "lHar"), ratio = s.reduce((x, r) => x + r.F, 0) / s.reduce((x, r) => x + r.realised, 0);
     out.horizons[h] = a ? { scored: s.length, days: a.days, improvement: a.improvement, dm_t: a.dm.t, dm_p: a.dm.p, coins_better: a.coinsBetter, coins_scored: a.coinsScored, forecast_to_realised: ratio } : { scored: s.length }; }
+  const rs = all.filter((r) => r.type === "range_score" && !r.voided); out.ranges = {}; for (const h of [1, 7]) { const x = rs.filter((r) => r.h === h); out.ranges[h] = x.length ? { scored: x.length, coverage: x.filter((r) => r.inside).length / x.length, below: x.filter((r) => r.below).length / x.length, above: x.filter((r) => r.above).length / x.length } : { scored: 0 }; }
+  out.range_rows = all.filter((r) => r.type === "range").length; out.range_gaps = all.filter((r) => r.type === "range" && r.lo === null).length;
   const have = new Set(preds.map((p) => p.t)); out.missed_forecast_days = []; for (let d = CFG.D0; d <= asOf; d = addDays(d, 1)) if (!have.has(d) && d < asOf) out.missed_forecast_days.push(d);
   return out;
 }
@@ -128,20 +131,28 @@ export async function main(env = process.env) {
     for (;;) { const short = coins.filter((c) => hoursOn(loadCoin(c.symbol, ROOT, fwd).hourly, t) < 22), late = Date.now() < Date.parse(runDate + "T02:00:00Z"); // retry until 09:00 WIB (02:00 UTC), then go on with what is available
       if (!short.length || !late) { if (short.length) console.log("Still short after the retry window:", short.map((c) => c.symbol).join(" ")); break; } console.log("Waiting for complete hourly data:", short.map((c) => c.symbol).join(" ")); await sleep(300000); await fetchNew(coins, t, fwd, km); } }
   const tIdx = dayIndex(t, CFG.START), existing = []; const dir = join(fwd, "ledger"); if (existsSync(dir)) for (const f of readdirSync(dir).sort()) existing.push(...readJsonl(join(dir, f)));
-  const preds = new Map(existing.filter((r) => r.type === "prediction").map((r) => [r.id, r])), scored = new Set(existing.filter((r) => r.type === "score").map((r) => r.id)), rows = [], latest = { as_of: t, made_at: made, version: "forward-v1.0", coins: {} };
+  const preds = new Map(existing.filter((r) => r.type === "prediction").map((r) => [r.id, r])), scored = new Set(existing.filter((r) => r.type === "score").map((r) => r.id)), rangeIds = new Set(existing.filter((r) => r.type === "range").map((r) => r.id)), ranges = existing.filter((r) => r.type === "range"), rangeScored = new Set(existing.filter((r) => r.type === "range_score").map((r) => r.id)), rangeRows = [], mismatches = [], rows = [], latest = { as_of: t, made_at: made, version: "forward-v1.0", coins: {} };
   for (const c of coins) {
     const data = loadCoin(c.symbol, ROOT, fwd), series = buildSeries(data, { start: CFG.START, nDays: tIdx + 1, target: "hourly" }), P = { 1: prepare(series, 1), 7: prepare(series, 7) }, closes = data.daily.map((r) => r[4]);
     for (const p of preds.values()) if (p.coin === c.symbol && !scored.has(p.id) && dayIndex(p.t, CFG.START) + p.h <= tIdx) rows.push(scoreRow(p, P[p.h], made));
     if (t < CFG.D0) continue;
+    const d0Idx = dayIndex(CFG.D0, CFG.START), wfCfg = { scoreStart: 0, scoreEnd: tIdx, anchorIdx: d0Idx - RANGE.ANCHOR_BACK, refit: RANGE.REFIT }, wf = { 1: forecastCoin(series, 1, wfCfg), 7: forecastCoin(series, 7, wfCfg) }, closesAt = new Array(tIdx + 1).fill(NaN), Fnow = {};
+    for (const r of data.daily) { const i = dayIndex(dateOf(r[0]), CFG.START); if (i >= 0 && i <= tIdx) closesAt[i] = r[4]; }
+    for (const p of preds.values()) if (p.coin === c.symbol && dayIndex(p.t, CFG.START) + p.h <= tIdx) { const F = wf[p.h].F[dayIndex(p.t, CFG.START)]; if (!(Math.abs(F - p.F) <= 1e-9 * p.F)) mismatches.push(p.id); } // from D0 on, the walk-forward forecast must equal the ledger value
+    for (const r of ranges) if (r.coin === c.symbol && !rangeScored.has(r.id) && dayIndex(r.t, CFG.START) + r.h <= tIdx) rangeRows.push(scoreRange(r, closesAt, dayIndex(r.t, CFG.START), r.h, P[1].isVoid, made));
     const trend = trendScore(closes), hours = hoursOn(data.hourly, t);
     for (const h of [1, 7]) { const id = `${c.symbol}|${h}|${t}`; if (preds.has(id)) continue; const fit = forecastAt(P[h], fitIndexFor(tIdx), tIdx); if (!fit) continue;
       const row = { type: "prediction", id, version: "forward-v1.0", coin: c.symbol, h, t, data_as_of: t, hours_t: hours, target_from: addDays(t, 1), target_to: addDays(t, h), F: fit.F, base: fit.base, ewma: fit.ewma, fit_date: dateAt(fitIndexFor(tIdx)), train_rows: fit.rows, b: fit.b, s2: fit.s2, trend_score: trend?.score ?? null, trend: trend?.reading ?? null, last_close: closes.at(-1), input_sha: sha(JSON.stringify(P[h].inp.slice(-30))), made_at: made, runner_sha: runnerSha, lib_sha: libHash, commit };
-      rows.push(row); if (h === 1) (latest.coins[c.symbol] ||= {}).daily = { variance: fit.F, typical_move: Math.sqrt(fit.F) }; else (latest.coins[c.symbol] ||= {}).weekly = { variance: fit.F, typical_move: Math.sqrt(fit.F) }; latest.coins[c.symbol].trend = trend?.reading ?? null; }
+      rows.push(row); Fnow[h] = fit.F; if (h === 1) (latest.coins[c.symbol] ||= {}).daily = { variance: fit.F, typical_move: Math.sqrt(fit.F) }; else (latest.coins[c.symbol] ||= {}).weekly = { variance: fit.F, typical_move: Math.sqrt(fit.F) }; latest.coins[c.symbol].trend = trend?.reading ?? null; }
+    for (const h of [1, 7]) { const id = `R|${c.symbol}|${h}|${t}`; if (rangeIds.has(id) || !(Fnow[h] > 0)) continue;
+      const pool = h === 1 ? pool1(closesAt, wf[1].F, tIdx) : pool7(closesAt, wf[7].F, tIdx), seed = rangeSeed(tIdx, coins.indexOf(c), h), rg = makeRange(pool, Fnow[h], seed);
+      rangeRows.push({ type: "range", id, version: RANGE.VERSION, coin: c.symbol, h, t, lo: rg.lo, hi: rg.hi, F: Fnow[h], n_pool: rg.n_pool, pool_sha: rg.pool_sha, ...(rg.reason ? { reason: rg.reason } : {}), seed, made_at: made, runner_sha: runnerSha, lib_sha: libHash, commit }); }
   }
+  rows.push(...rangeRows); if (mismatches.length) console.log("WALK-FORWARD MISMATCH with the ledger for:", mismatches.join(" "));
   if (env.DRY === "1") { console.log(`DRY run for ${t}: ${rows.length} rows would be written`); return { rows }; }
-  const span = appendLedger(fwd, runDate, rows), entry = appendDigest(fwd, runDate, span, { t, runner_sha: runnerSha, lib_sha: libHash, commit });
+  const span = appendLedger(fwd, runDate, rows), entry = appendDigest(fwd, runDate, span, { t, runner_sha: runnerSha, lib_sha: libHash, commit, runner_version: RANGE.VERSION, walkforward_mismatch: mismatches.length });
   mkdirSync(fwd, { recursive: true }); writeFileSync(join(fwd, "scorecard.json"), JSON.stringify(scorecard(fwd, runDate), null, 1) + "\n"); if (Object.keys(latest.coins).length) writeFileSync(join(fwd, "latest.json"), JSON.stringify(latest, null, 1) + "\n");
-  console.log(`Run for data day ${t}: ${rows.filter((r) => r.type === "prediction").length} predictions, ${rows.filter((r) => r.type === "score").length} scores. Digest ${entry.digest}`);
+  console.log(`Run for data day ${t}: ${rows.filter((r) => r.type === "prediction").length} predictions, ${rows.filter((r) => r.type === "score").length} scores, ${rows.filter((r) => r.type === "range").length} ranges, ${rows.filter((r) => r.type === "range_score").length} range scores. Digest ${entry.digest}`);
   if (env.GITHUB_OUTPUT) appendFileSync(env.GITHUB_OUTPUT, `digest=${entry.digest}\nrun_date=${runDate}\nt=${t}\n`);
   return { rows, entry };
 }

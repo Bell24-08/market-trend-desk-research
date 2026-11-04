@@ -6,6 +6,7 @@ import { join } from "node:path";
 import { forecastCoin, qlike, addDays } from "../lib.mjs";
 import { CFG, LIB_SHA256, checkLib, prepare, forecastAt, fitIndexFor, trendScore, appendLedger, appendDigest, verifyLedger, scoreRow, readJsonl, main, sha } from "./runner.mjs";
 import { q3Stats } from "./q3.mjs";
+import { RANGE, rangeSeed, makeRange, scoreRange, kupiec, christoffersen, pooledCoverage } from "./range.mjs";
 
 let pass = 0; const t = async (name, fn) => { try { await fn(); pass++; console.log("PASS", name); } catch (e) { console.error("FAIL", name, "-", e.message); process.exitCode = 1; } };
 const rng = (a) => () => { a |= 0; a = a + 0x6D2B79F5 | 0; let x = Math.imul(a ^ a >>> 15, 1 | a); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; };
@@ -60,6 +61,34 @@ await t("end to end on real data with a shifted D0: predictions are written once
     assert.ok(verifyLedger(fwd).ok, verifyLedger(fwd).problems.join("; ")); assert.equal(readJsonl(join(fwd, "digests.jsonl")).length, 3);
     const before = readFileSync(join(fwd, "ledger", "2026-06.jsonl"), "utf8").split("\n").slice(0, 60).join("\n"); assert.equal(before, p1.map((r) => JSON.stringify(r)).join("\n"), "the first day's rows are unchanged");
     assert.ok(existsSync(join(fwd, "scorecard.json")) && existsSync(join(fwd, "latest.json")));
+  } finally { CFG.D0 = saved; }
+});
+await t("range: same inputs give the same range and pool hash, the pool is de-meaned, a short pool gives a reported gap, seeds differ by day, coin and horizon", () => {
+  const r = rng(4), pool = Array.from({ length: 365 }, () => 0.3 + gauss(r)), a = makeRange(pool, 4e-4, 77), b = makeRange(pool, 4e-4, 77), c = makeRange(pool, 4e-4, 78);
+  assert.deepEqual(a, b); assert.notEqual(a.lo, c.lo); assert.ok(a.lo < 0 && a.hi > 0 && Math.abs(a.hi + a.lo) < 0.5 * (a.hi - a.lo), "centred near zero although the pool mean is 0.3");
+  assert.ok(Math.abs(a.hi - 1.645 * 0.02) < 0.01 && Math.abs(a.lo + 1.645 * 0.02) < 0.01, "about 1.645 x sqrt(F) for a roughly normal pool");
+  const g = makeRange(pool.slice(0, 300), 4e-4, 1); assert.equal(g.lo, null); assert.equal(g.reason, "pool_short"); assert.equal(makeRange(pool, 0, 1).reason, "no_forecast");
+  assert.equal(new Set([rangeSeed(100, 3, 1), rangeSeed(101, 3, 1), rangeSeed(100, 4, 1), rangeSeed(100, 3, 7)]).size, 4); assert.equal(rangeSeed(100, 3, 1), 19 + 100000 + 3); assert.equal(rangeSeed(100, 3, 7), 19 + 100000 + 3 + 500000);
+});
+await t("range scoring: inside, below, above; a void day or a missing candle is reported as void; the walk-forward forecast equals the ledger from D0 (no mismatch reported)", () => {
+  const closes = [100, 100, 101, 99, 100, 100, 100, 100, 100, 130], rg = { id: "R", coin: "X", lo: -0.02, hi: 0.02 }, none = () => false;
+  assert.equal(scoreRange(rg, closes, 2, 1, none, "n").below, true); assert.equal(scoreRange(rg, closes, 3, 1, none, "n").inside, true); assert.equal(scoreRange(rg, closes, 8, 1, none, "n").above, true);
+  assert.equal(scoreRange(rg, closes, 2, 1, (i) => i === 3, "n").voided, true); closes[3] = NaN; assert.equal(scoreRange(rg, closes, 2, 1, none, "n").voided, true); assert.equal(scoreRange({ ...rg, lo: null }, closes, 4, 1, none, "n").voided, true);
+});
+await t("coverage tests: Kupiec and Christoffersen give their textbook values, the pooled interval is reproducible", () => {
+  const k = kupiec(1000, 900); assert.ok(Math.abs(k.lr) < 1e-9 && k.p > 0.99); const k2 = kupiec(1000, 860); assert.ok(Math.abs(k2.lr - 16.017) < 0.01 && k2.p < 1e-4, "lr " + k2.lr); assert.ok(Math.abs(kupiec(100, 85).p - 0.1179) < 0.005);
+  const alt = Array.from({ length: 200 }, (_, i) => (i % 2 ? 1 : 0)); assert.ok(christoffersen(alt).p < 1e-6, "perfectly alternating hits are not independent");
+  const rows = Array.from({ length: 700 }, (_, i) => ({ week: Math.floor(i / 7), inside: i % 10 !== 0 })), p1 = pooledCoverage(rows, { resamples: 500 }), p2 = pooledCoverage(rows, { resamples: 500 });
+  assert.deepEqual(p1, p2); assert.ok(Math.abs(p1.coverage - 0.9) < 1e-12 && p1.ci95[0] <= 0.9 && p1.ci95[1] >= 0.9);
+});
+await t("range logging: the runner version is v2, prediction rows are the v1 rows (same fields and values apart from run labels), range rows are written once, same-day rerun adds nothing", async () => {
+  const fwd = tmp(), saved = CFG.D0; CFG.D0 = "2026-06-01";
+  try { const r = await main({ FORWARD_DIR: fwd, NOFETCH: "1", NOW: "2026-06-10T01:00:00Z" }), rg = r.rows.filter((x) => x.type === "range"), pr = r.rows.filter((x) => x.type === "prediction");
+    assert.equal(pr.length, 60); assert.equal(rg.length, 60); assert.ok(rg.every((x) => x.version === "forward-v2.0" && x.t === "2026-06-09" && x.n_pool >= 330 && x.lo < 0 && x.hi > 0 && /^[0-9a-f]{64}$/.test(x.pool_sha)), "every coin has a range with a full pool");
+    assert.ok(pr.every((x) => x.version === "forward-v1.0"), "prediction rows keep the v1 label and fields"); assert.equal(readJsonl(join(fwd, "digests.jsonl")).at(-1).walkforward_mismatch, 0, "the walk-forward forecast equals the ledger value");
+    const r2 = await main({ FORWARD_DIR: fwd, NOFETCH: "1", NOW: "2026-06-10T02:00:00Z" }); assert.equal(r2.rows.length, 0);
+    const r3 = await main({ FORWARD_DIR: fwd, NOFETCH: "1", NOW: "2026-06-11T01:00:00Z" }); assert.equal(r3.rows.filter((x) => x.type === "range_score").length, 30, "the 1-day ranges of 06-09 are scored on 06-10"); assert.ok(readJsonl(join(fwd, "digests.jsonl")).at(-1).walkforward_mismatch === 0);
+    assert.ok(verifyLedger(fwd).ok);
   } finally { CFG.D0 = saved; }
 });
 console.log(process.exitCode ? "\nSome checks FAILED" : `\nAll ${pass} checks passed`);

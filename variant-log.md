@@ -50,6 +50,7 @@ Counted separately from the direction variants above. None of these were chosen 
 | V3 | EWMA lambda 0.94 | pre-registered, secondary, never decides |
 | V4 | Parkinson-variance robustness run | pre-registered, reported only |
 | V5 | Run without the spike rule | pre-registered, reported only |
+| V6 | Filtered-historical-simulation 90% range for the next-day and next-7-day move (coverage test), `preregistration-range-v1.0.md`, runner `forward-v2.0` | pre-registered, forward data only, verdict 2027-11-08 |
 
 Code corrections made before the locked year was opened (not new strategies):
 - code-v1.1: removed the leveraged-token name pattern, zero-range void in hourly mode, single locked call (found in review, before any data existed).
