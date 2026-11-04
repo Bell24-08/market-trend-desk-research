@@ -29,8 +29,7 @@ const sha = (buf) => createHash("sha256").update(buf).digest("hex");
 
 const ex = JSON.parse(readFileSync("exclusions.json", "utf8")), excluded = new Map();
 for (const [cat, list] of Object.entries(ex)) if (Array.isArray(list)) for (const s of list) excluded.set(s, cat);
-const lev = new RegExp(ex.leveraged_token_pattern);
-const reasonFor = (p) => excluded.get(p.base_currency) || (lev.test(p.base_currency) ? "leveraged_token_pattern" : null) || (p.fx_stablecoin ? "stablecoin (Coinbase flag)" : null);
+const reasonFor = (p) => excluded.get(p.base_currency) || (p.fx_stablecoin ? "stablecoin (Coinbase flag)" : null);
 
 async function main() {
   if (MODE === "full" && existsSync("data")) { console.log("data/ already exists: the fetch is a one-off. Refusing to run again."); process.exit(1); }
@@ -44,7 +43,10 @@ async function main() {
     const r = await candles(c.product, 86400, sec(RANK_FROM), sec(DEV_END, true)); c.volumeUSD = r.reduce((a, x) => a + x[5] * x[4], 0);
   }
   const eligible = cands.filter((c) => !c.excluded && c.volumeUSD > 0).sort((a, b) => b.volumeUSD - a.volumeUSD), selected = MODE === "dry" ? eligible : eligible.slice(0, TOP);
+  say(`Code version (GITHUB_SHA): ${process.env.GITHUB_SHA || "not run in an Action"}`);
+  for (const c of cands.filter((c) => c.excluded)) say(`excluded ${c.symbol}: ${c.excluded}`);
   say(`Excluded ${cands.filter((c) => c.excluded).length}; eligible ${eligible.length}; selected ${selected.length}`);
+  for (const c of selected) say(`selected ${c.symbol}: USD volume ${Math.round(c.volumeUSD)}`);
   const from = MODE === "dry" ? "2024-01-01" : START, to = MODE === "dry" ? "2024-01-08" : LOCK_END;
   if (MODE === "dry") for (const c of selected) { const h = await candles(c.product, 3600, sec(from), sec(to, true)), d = await candles(c.product, 86400, sec(from), sec(to, true)); say(`${c.symbol}: ${h.length} hourly rows, ${d.length} daily rows for ${from}..${to} (dry run, nothing written)`); }
   if (MODE === "dry") return;
@@ -52,6 +54,8 @@ async function main() {
   for (const d of ["data/dev", "data/locked", "data/kraken"]) mkdirSync(d, { recursive: true });
   const cut = sec(LOCK_START), days = Math.round((sec(LOCK_END, true) - sec(START)) / 86400), full = new Map();
   let complete = 0, total = 0;
+  const kraken = new Map(); { const ap = (await get("https://api.kraken.com/0/public/AssetPairs")).result; for (const [key, p] of Object.entries(ap)) if (p.wsname && p.wsname.endsWith("/USD")) kraken.set(p.wsname.split("/")[0], key); }
+  const krakenKey = (s) => kraken.get(s) || kraken.get({ BTC: "XBT", DOGE: "XDG" }[s]);
   for (const c of selected) {
     const hourly = await candles(c.product, 3600, sec(START) - 3600, sec(LOCK_END, true)), daily = await candles(c.product, 86400, sec(START), sec(LOCK_END, true));
     for (const [kind, rows] of [["hourly", hourly], ["daily", daily]]) { // development period and locked year go to different files
@@ -60,9 +64,12 @@ async function main() {
     const per = new Map(); for (const r of hourly) per.set(dateOf(r[0]), (per.get(dateOf(r[0])) || 0) + 1);
     complete += [...per.values()].filter((n) => n >= 22).length; total += days;
     try { // Kraken daily candles (latest 720 only), used only by the spike rule; only days up to the end of the locked year are kept
-      const k = await get(`https://api.kraken.com/0/public/OHLC?pair=${c.symbol === "BTC" ? "XBT" : c.symbol}USD&interval=1440`);
-      if (!k.error?.length) { const rows = Object.entries(k.result).find(([n]) => n !== "last")[1].map((r) => [r[0], +r[1], +r[2], +r[3], +r[4], +r[6]]).filter((r) => r[0] <= sec(LOCK_END, true)); writeFileSync(`data/kraken/${c.symbol}-daily.csv.gz`, gzipSync(csv(rows))); }
-    } catch {}
+      const key = krakenKey(c.symbol);
+      if (!key) say(`Kraken ${c.symbol}: none (no USD pair in AssetPairs)`);
+      else { const k = await get(`https://api.kraken.com/0/public/OHLC?pair=${key}&interval=1440`);
+        if (k.error?.length) say(`Kraken ${c.symbol}: none (${k.error[0]})`);
+        else { const rows = Object.entries(k.result).find(([n]) => n !== "last")[1].map((r) => [r[0], +r[1], +r[2], +r[3], +r[4], +r[6]]).filter((r) => r[0] <= sec(LOCK_END, true)); writeFileSync(`data/kraken/${c.symbol}-daily.csv.gz`, gzipSync(csv(rows))); say(`Kraken ${c.symbol}: ${rows.length} candles (pair ${key})`); } }
+    } catch (e) { say(`Kraken ${c.symbol}: none (${e.message})`); }
     await sleep(500); say(`fetched ${c.symbol}`);
   }
   const coverage = complete / total;

@@ -13,11 +13,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
       - name: Offline tests
         run: node test.mjs
+      - name: Full mode must run exactly the published code tag
+        if: ${{ inputs.mode == 'full' }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$(git rev-parse "$CODE_TAG^{commit}")" || { echo "HEAD is not $CODE_TAG: refusing to fetch"; exit 1; }
+        env:
+          CODE_TAG: code-v1.1
       - name: Fetch
         run: node fetch.mjs
         env:

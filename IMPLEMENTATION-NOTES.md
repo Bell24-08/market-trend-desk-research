@@ -1,0 +1,16 @@
+# Implementation notes (code-v1.1)
+
+Where the code interprets preregistration-volatility-v1.0.md. Each item is a reading of the document, not a change to it.
+
+1. **History rule.** "First daily Coinbase candle on or before 2023-11-03" is implemented as "at least one daily candle between 2023-01-08 and 2023-11-03" (exactly 300 days, one Coinbase request). It differs only for a coin that traded before 2023 and then had no trades for ten months.
+2. **Exclusions.** Explicit symbol lists in `exclusions.json` plus Coinbase's `fx_stablecoin` flag. Liquid-staking tokens (stETH, mSOL and similar) are treated as wrapped tokens, which is an interpretation. WAXL and WCFG are their projects' own tokens under a wrapped-style ticker; they are listed as wrapped by ticker and are unlikely to reach the top 30. The earlier leveraged-token name pattern was removed in v1.1 because it wrongly matched real coins such as JUP; Coinbase lists no leveraged tokens. Every exclusion and its reason is written to `fetch-log.txt`.
+3. **Training rows.** A row is used only if its whole target window ended on or before the refit date, its input windows are valid, and all its target days are present and non-void. Void target days are dropped from training and scoring.
+4. **7-day scoring.** A forecast is scored only if all 7 target days are present and non-void and the window ends on or before 2026-11-03.
+5. **Input windows.** A void day is replaced by the median of the previous 30 non-void days and counts as present. A window mean needs at least ceil(0.8 x length) present days.
+6. **Forecast.** HAR forecast = exp(fitted + 0.5 x SSE/(n-k)). The 7-day HAR is a separate regression on the log of the 7-day sum. The 7-day baseline and EWMA are 7 times the one-day values.
+7. **Refits.** Every 30 days from an anchor: 2025-11-03 for the locked year, the first day with at least 365 training rows for the development run.
+8. **Spike rule.** In Garman-Klass mode a day is flagged if ln(H/L) exceeds 5 times the trailing 30-day median of ln(H/L) (zero-range days excluded from the median). In hourly mode it is flagged if the day's realised variance exceeds 25 times the trailing 30-day median (non-void days). A flagged day is voided only if Kraken has a candle for that day and Kraken's ln(H/L) is below 2 times Kraken's own trailing 30-day median (zero-range days excluded); otherwise it is kept. Kraken pairs are mapped through Kraken's `AssetPairs`, and each coin's Kraken candle count (or the reason there is none) is written to `fetch-log.txt`.
+9. **Zero-range days.** A day with high equal to low (or hourly variance at the floor) is void in both target modes.
+10. **Scoring.** Per day, the average QLIKE across the coins available that day; the 3% test and the one-sided Diebold-Mariano test (Newey-West lag 6, normal approximation) use that same series. A coin improves if its mean QLIKE is below the baseline's.
+11. **One locked call.** A single `--period locked` call computes the main result, EWMA, the run without the spike rule and the Parkinson run, and writes them to one file, so the one-time opening cannot be spent on the wrong configuration. Only the main result decides the verdict.
+12. **Code version.** The full fetch runs only if the checked-out commit equals tag `code-v1.1`, and `fetch-log.txt` records the commit hash.

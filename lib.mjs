@@ -32,11 +32,11 @@ export function buildSeries({ daily, hourly, kraken }, { start, nDays, target })
   const hr = target === "hourly" ? hourlyRV(hourly || [], start, nDays) : null;
   for (let i = 0; i < nDays; i++) {
     const c = D[i]; if (c) rg[i] = Math.log(c[2] / c[3]); const k = K[i]; if (k) krRg[i] = Math.log(k[2] / k[3]);
-    if (target === "hourly") { if (finite(hr.rv[i])) { tv[i] = Math.max(hr.rv[i], FLOOR); if (hr.missing[i] > 2) structVoid[i] = true; } }
+    if (target === "hourly") { if (finite(hr.rv[i])) { tv[i] = Math.max(hr.rv[i], FLOOR); if (hr.missing[i] > 2 || hr.rv[i] <= FLOOR || (c && c[2] === c[3])) structVoid[i] = true; } } // zero range (no movement) is void whatever the target
     else if (c) { if (c[2] === c[3]) { structVoid[i] = true; tv[i] = FLOOR; } else tv[i] = Math.max(target === "gk" ? gk(c[1], c[2], c[3], c[4]) : parkinson(c[2], c[3]), FLOOR); }
   }
   // spike rule: flagged when far above the trailing 30-day median; voided only if Kraken does not show the same spike (a single-exchange wick)
-  const spike = new Array(nDays).fill(false), trail = (a, i) => median(a.slice(Math.max(0, i - 30), i));
+  const spike = new Array(nDays).fill(false), trail = (a, i) => median(a.slice(Math.max(0, i - 30), i).filter((v) => v > 0)); // zero-range days do not lower the median
   for (let i = 30; i < nDays; i++) {
     const flagged = target === "hourly" ? tv[i] > 25 * median(tv.slice(Math.max(0, i - 30), i).filter((v, j) => !structVoid[Math.max(0, i - 30) + j])) : rg[i] > 5 * trail(rg, i);
     if (!flagged) continue;

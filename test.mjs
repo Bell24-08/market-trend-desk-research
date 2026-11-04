@@ -45,4 +45,15 @@ t("HAR beats the 30-day average on persistent synthetic volatility; the verdict 
 });
 t("a coin with too little history is skipped, not guessed", () => { const s = synth(200, 0.9, 9), r = forecastCoin(s, 1, { scoreStart: 0, scoreEnd: 199 }); assert.ok(r.lHar.every((v) => !Number.isFinite(v))); });
 t("median ignores missing values", () => assert.equal(median([1, NaN, 3, 2]), 2));
+t("zero-range day is void in hourly mode too (a flat day is not a real zero-variance day)", () => {
+  const start = "2024-01-01", t0 = Date.parse(start + "T00:00:00Z") / 1000, hourly = [], daily = [];
+  for (let d = 0; d < 3; d++) { for (let h = 0; h < 24; h++) { const px = d === 1 ? 100 : 100 + (h % 3); hourly.push([t0 + d * 86400 + h * 3600, px, px, px, px, 1]); } daily.push([t0 + d * 86400, 100, d === 1 ? 100 : 102, d === 1 ? 100 : 99, 100, 1]); }
+  hourly.push([t0 - 3600, 100, 100, 100, 100, 1]); hourly.sort((a, b) => a[0] - b[0]);
+  const s = buildSeries({ daily, hourly, kraken: [] }, { start, nDays: 3, target: "hourly" }); assert.equal(s.structVoid[1], true); assert.equal(s.structVoid[0], false);
+});
+t("spike median ignores zero-range days (a normal 3% day is not flagged because many quiet days sit before it)", () => {
+  const start = "2024-01-01", n = 80, t0 = Date.parse(start + "T00:00:00Z") / 1000, mk = (flat) => Array.from({ length: n }, (_, i) => (flat(i) ? [t0 + i * 86400, 100, 100, 100, 100, 1] : [t0 + i * 86400, 100, i === 60 ? 103 : 101, 99, 100.2, 1]));
+  const daily = mk((i) => i >= 30 && i < 60 && i % 3 !== 0), kraken = mk(() => false), s = buildSeries({ daily, kraken }, { start, nDays: n, target: "gk" });
+  assert.equal(s.spike[60], false);
+});
 console.log(process.exitCode ? "\nSome checks FAILED" : `\nAll ${pass} checks passed`);
