@@ -61,4 +61,9 @@ t("diagnostics do not change scoring: stored forecast and realised value reprodu
   for (let i = 0; i < 900; i++) if (Number.isFinite(r.lHar[i])) { assert.ok(Math.abs(qlike(r.R[i], r.F[i]) - r.lHar[i]) < 1e-12); k++; }
   assert.ok(k > 100 && r.coefs.length > 3 && r.coefs[0].b.length === 4);
 });
+t("spike rule keeps the day when Kraken has less than 24 days of history before it (its median would be built from the spike itself)", () => {
+  const start = "2024-01-01", n = 80, t0 = Date.parse(start + "T00:00:00Z") / 1000, mk = (spikeH, from) => Array.from({ length: n }, (_, i) => [t0 + i * 86400, 100, i === 60 ? spikeH : 101, 99, 100.2, 1]).filter((r, i) => i >= from);
+  const daily = mk(120, 0), short = buildSeries({ daily, kraken: mk(101, 58) }, { start, nDays: n, target: "gk" }), full = buildSeries({ daily, kraken: mk(101, 0) }, { start, nDays: n, target: "gk" });
+  assert.equal(short.spike[60], false); assert.equal(full.spike[60], true);
+});
 console.log(process.exitCode ? "\nSome checks FAILED" : `\nAll ${pass} checks passed`);

@@ -1,4 +1,4 @@
-# Implementation notes (code-v1.3)
+# Implementation notes (code-v1.4)
 
 Where the code interprets preregistration-volatility-v1.0.md. Each item is a reading of the document, not a change to it.
 
@@ -25,3 +25,4 @@ Where the code interprets preregistration-volatility-v1.0.md. Each item is a rea
     - No single coin should dominate the average loss, and the EWMA and Parkinson runs should point the same way as HAR.
     - A bug found is fixed and logged with its reason before the locked year is opened, and the fix gets a new code tag.
 18. **Diagnostics (code-v1.3).** The analysis prints per-coin improvement, the forecast-to-realised ratio, last-refit HAR coefficients and void counts per coin. Scoring is unchanged; a test checks that the stored forecast and realised value reproduce the scored loss.
+19. **Bug found in the first development run, fixed in code-v1.4.** The spike rule voided 6 days (3 XRP, 3 XLM, 2024-11-15 to 2024-11-22), all in the first week of Kraken's data. There Kraken's trailing 30-day median was built from one or two days, and those days were the spikes themselves, so Kraken's range always looked "normal" against it and real moves were voided although Kraken confirmed them (for example XRP 39.2% on Coinbase and 37.3% on Kraken the same day). The pre-registration voids only single-exchange wicks, so this was a bug. Fix: Kraken's trailing median needs at least 24 of the previous 30 days (the same 80% rule used elsewhere); otherwise the day is kept. This affects only the early development period: in the locked year every coin has months of Kraken history. Kraken alignment was checked at the same time: the Coinbase and Kraken daily ranges correlate most strongly at lag 0 for every coin (0.69-0.99), so the candles are aligned. The first development run (code-v1.3, commit a219e74) is kept in the history.

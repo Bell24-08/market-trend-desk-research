@@ -40,8 +40,8 @@ export function buildSeries({ daily, hourly, kraken }, { start, nDays, target })
   for (let i = 30; i < nDays; i++) {
     const flagged = target === "hourly" ? tv[i] > 25 * median(tv.slice(Math.max(0, i - 30), i).filter((v, j) => !structVoid[Math.max(0, i - 30) + j])) : rg[i] > 5 * trail(rg, i);
     if (!flagged) continue;
-    const km = trail(krRg, i); // Kraken absent or not covering the day: keep the day
-    if (finite(krRg[i]) && finite(km) && krRg[i] < 2 * km) spike[i] = true;
+    const kw = krRg.slice(Math.max(0, i - 30), i).filter((v) => v > 0), km = median(kw); // Kraken absent, not covering the day, or fewer than 24 of the previous 30 days (80%): keep the day
+    if (finite(krRg[i]) && kw.length >= 24 && krRg[i] < 2 * km) spike[i] = true;
   }
   return { tv, structVoid, spike, n: nDays };
 }
