@@ -1,0 +1,8 @@
+{
+  "note": "Exclusions for the coin list, written down before any data is fetched. By rule only: stablecoins, wrapped / liquid-staking tokens, gold-backed tokens, leveraged tokens, tokenized stocks, real-world-asset tokens. Coinbase's own fx_stablecoin flag is also used automatically. A symbol not listed here is included. Adding a symbol after results are seen is a logged variant.",
+  "stablecoin": ["USDT", "USDC", "DAI", "PYUSD", "EURC", "GUSD", "USDP", "PAX", "TUSD", "FDUSD", "USDS", "RLUSD", "UST", "LUSD", "FRAX", "BUSD", "USDE", "USD1", "USDG", "AUSD"],
+  "wrapped_or_liquid_staking": ["WBTC", "WETH", "CBBTC", "CBETH", "WSTETH", "STETH", "RETH", "WEETH", "LSETH", "MSOL", "JITOSOL", "WAXL", "WCFG", "TBTC", "SOLVBTC", "CBXRP", "CBDOGE", "CBLTC", "CBADA", "CBSOL", "BSOL", "METH", "EZETH"],
+  "gold_backed": ["PAXG", "XAUT"],
+  "tokenized_stock_or_rwa": ["BUIDL", "USDY", "OUSG", "BENJI", "TSLAX", "AAPLX", "NVDAX", "COINX", "MSTRX", "SPYX", "QQQX", "GOOGLX", "METAX", "AMZNX", "CRCLX"],
+  "leveraged_token_pattern": "^[A-Z0-9]+(UP|DOWN|BULL|BEAR|[2-5][LS])$"
+}

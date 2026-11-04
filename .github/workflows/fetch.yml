@@ -1,0 +1,32 @@
+name: fetch-data
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry = 3 coins, 8 development-period days, prints counts only; full = the one-off fetch (commits data and hashes)"
+        required: true
+        default: dry
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Offline tests
+        run: node test.mjs
+      - name: Fetch
+        run: node fetch.mjs
+        env:
+          MODE: ${{ inputs.mode }}
+      - name: Commit data, coin list and hashes (full mode only)
+        if: ${{ inputs.mode == 'full' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data coins.json target-decision.json SHA256SUMS.txt fetch-log.txt
+          git commit -m "Data fetch for pre-registration v1.0 (coin list and SHA-256 of every data file)"
+          git push
