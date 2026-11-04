@@ -23,12 +23,12 @@ const cache = Object.fromEntries(coins.map((s) => [s, { daily: rowsOf("daily", s
 const f = (x, d = 4) => (Number.isFinite(x) ? x.toFixed(d) : "n/a"), lines = [], say = (s = "") => { console.log(s); lines.push(s); };
 
 function run(title, target, applyVoids, decides) {
-  const per = { 1: {}, 7: {} }, res = {}; let voids = 0, flagged = 0;
+  const per = { 1: {}, 7: {} }, res = {}; let spikeVoids = 0, zeroVoids = 0;
   for (const sym of coins) {
-    const series = buildSeries(cache[sym], { start: START, nDays, target }); voids += series.spike.filter(Boolean).length + series.structVoid.filter(Boolean).length;
+    const series = buildSeries(cache[sym], { start: START, nDays, target }); for (let i = scoreStart; i <= scoreEnd; i++) { if (series.structVoid[i]) zeroVoids++; else if (applyVoids && series.spike[i]) spikeVoids++; }
     for (const h of [1, 7]) per[h][sym] = forecastCoin(series, h, { applyVoids, anchorIdx, scoreStart, scoreEnd });
   }
-  say(`\n=== ${title} (target ${target}, spike rule ${applyVoids ? "applied" : "NOT applied"}, void coin-days counted: ${voids}) ===`);
+  say(`\n=== ${title} (target ${target}, spike rule ${applyVoids ? "applied" : "NOT applied"}; scored period: spike voids ${spikeVoids}, zero-range or missing-hour voids ${zeroVoids}) ===`);
   for (const [key, label] of [["lHar", "HAR"], ["lEw", "EWMA 0.94"]]) for (const h of [1, 7]) {
     const r = aggregate(per[h], key); res[`${key}${h}`] = r;
     say(`${label}, ${h}-day: ` + (r ? `${r.days} scored days. QLIKE baseline ${f(r.meanBase)} vs model ${f(r.meanModel)} (improvement ${f(100 * r.improvement, 2)}%). DM t=${f(r.dm.t, 2)}, p=${f(r.dm.p)}. Coins better ${r.coinsBetter}/${r.coinsScored} (${f(100 * r.shareBetter, 0)}%).${key === "lHar" ? " Pass mark " + (horizonPasses(r) ? "MET" : "not met") : ""}` : "no scored days"));

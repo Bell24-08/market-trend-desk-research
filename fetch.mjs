@@ -1,3 +1,4 @@
+// MODE=preview node fetch.mjs  runs the REAL coin selection over all Coinbase USD pairs and the Kraken mapping; prints and writes a job summary only. No hourly data, no files.
 // node fetch.mjs            MODE=dry (default): fetches 3 coins for 8 development-period days and prints counts only. Writes nothing.
 // MODE=full node fetch.mjs  the one-off data fetch for preregistration-volatility-v1.0.md. Refuses to run if data/ already exists.
 // Runs in a GitHub Action (Coinbase is reachable from there). Writes data files, coins.json, target-decision.json, SHA256SUMS.txt, fetch-log.txt. Analyses nothing.
@@ -31,6 +32,8 @@ const ex = JSON.parse(readFileSync("exclusions.json", "utf8")), excluded = new M
 for (const [cat, list] of Object.entries(ex)) if (Array.isArray(list)) for (const s of list) excluded.set(s, cat);
 const reasonFor = (p) => excluded.get(p.base_currency) || (p.fx_stablecoin ? "stablecoin (Coinbase flag)" : null);
 
+async function krakenMap() { const ap = (await get("https://api.kraken.com/0/public/AssetPairs")).result, m = new Map(); for (const [key, p] of Object.entries(ap)) if (p.wsname && p.wsname.endsWith("/USD")) m.set(p.wsname.split("/")[0], key); return (s) => m.get(s) || m.get({ BTC: "XBT", DOGE: "XDG" }[s]); }
+
 async function main() {
   if (MODE === "full" && existsSync("data")) { console.log("data/ already exists: the fetch is a one-off. Refusing to run again."); process.exit(1); }
   say(`Mode ${MODE}. ${new Date().toISOString()}`);
@@ -47,6 +50,13 @@ async function main() {
   for (const c of cands.filter((c) => c.excluded)) say(`excluded ${c.symbol}: ${c.excluded}`);
   say(`Excluded ${cands.filter((c) => c.excluded).length}; eligible ${eligible.length}; selected ${selected.length}`);
   for (const c of selected) say(`selected ${c.symbol}: USD volume ${Math.round(c.volumeUSD)}`);
+  if (MODE === "preview") {
+    const kk = await krakenMap(), md = ["## Coin selection preview (nothing written, no hourly data)", `Code version: ${process.env.GITHUB_SHA}`, "", `Selected ${selected.length} coins (rank, symbol, Coinbase USD volume over 2025-08-06..2025-11-03, Kraken pair):`, ""];
+    selected.forEach((c, i) => md.push(`${i + 1}. ${c.symbol} | ${Math.round(c.volumeUSD).toLocaleString("en-US")} | Kraken: ${kk(c.symbol) || "none"}`));
+    md.push("", "Next 10 eligible coins (ranks 31-40, for context):", ""); eligible.slice(TOP, TOP + 10).forEach((c, i) => md.push(`${TOP + i + 1}. ${c.symbol} | ${Math.round(c.volumeUSD).toLocaleString("en-US")}`));
+    md.push("", `Excluded (${cands.filter((c) => c.excluded).length}), symbol: reason:`, ""); for (const c of cands.filter((c) => c.excluded)) md.push(`- ${c.symbol}: ${c.excluded}`);
+    say(md.join("\n")); if (process.env.GITHUB_STEP_SUMMARY) writeFileSync(process.env.GITHUB_STEP_SUMMARY, md.join("\n") + "\n", { flag: "a" }); return;
+  }
   const from = MODE === "dry" ? "2024-01-01" : START, to = MODE === "dry" ? "2024-01-08" : LOCK_END;
   if (MODE === "dry") for (const c of selected) { const h = await candles(c.product, 3600, sec(from), sec(to, true)), d = await candles(c.product, 86400, sec(from), sec(to, true)); say(`${c.symbol}: ${h.length} hourly rows, ${d.length} daily rows for ${from}..${to} (dry run, nothing written)`); }
   if (MODE === "dry") return;
@@ -54,8 +64,7 @@ async function main() {
   for (const d of ["data/dev", "data/locked", "data/kraken"]) mkdirSync(d, { recursive: true });
   const cut = sec(LOCK_START), days = Math.round((sec(LOCK_END, true) - sec(START)) / 86400), full = new Map();
   let complete = 0, total = 0;
-  const kraken = new Map(); { const ap = (await get("https://api.kraken.com/0/public/AssetPairs")).result; for (const [key, p] of Object.entries(ap)) if (p.wsname && p.wsname.endsWith("/USD")) kraken.set(p.wsname.split("/")[0], key); }
-  const krakenKey = (s) => kraken.get(s) || kraken.get({ BTC: "XBT", DOGE: "XDG" }[s]);
+  const krakenKey = await krakenMap();
   for (const c of selected) {
     const hourly = await candles(c.product, 3600, sec(START) - 3600, sec(LOCK_END, true)), daily = await candles(c.product, 86400, sec(START), sec(LOCK_END, true));
     for (const [kind, rows] of [["hourly", hourly], ["daily", daily]]) { // development period and locked year go to different files

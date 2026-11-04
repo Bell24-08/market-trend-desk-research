@@ -1,4 +1,4 @@
-# Implementation notes (code-v1.1)
+# Implementation notes (code-v1.2)
 
 Where the code interprets preregistration-volatility-v1.0.md. Each item is a reading of the document, not a change to it.
 
@@ -13,4 +13,6 @@ Where the code interprets preregistration-volatility-v1.0.md. Each item is a rea
 9. **Zero-range days.** A day with high equal to low (or hourly variance at the floor) is void in both target modes.
 10. **Scoring.** Per day, the average QLIKE across the coins available that day; the 3% test and the one-sided Diebold-Mariano test (Newey-West lag 6, normal approximation) use that same series. A coin improves if its mean QLIKE is below the baseline's.
 11. **One locked call.** A single `--period locked` call computes the main result, EWMA, the run without the spike rule and the Parkinson run, and writes them to one file, so the one-time opening cannot be spent on the wrong configuration. Only the main result decides the verdict.
-12. **Code version.** The full fetch runs only if the checked-out commit equals tag `code-v1.1`, and `fetch-log.txt` records the commit hash.
+12. **Code version.** The full fetch runs only if the checked-out commit equals tag `code-v1.2`, and `fetch-log.txt` records the commit hash.
+13. **Preview.** `MODE=preview` runs the real coin selection over all Coinbase USD pairs and the Kraken mapping and prints the result as a job summary. It writes nothing and downloads no hourly data. The coin list depends only on volume before the lock, not on any volatility result.
+14. **Void log.** The analysis reports spike voids and zero-range or missing-hour voids separately, for the scored period only, and spike voids are not counted in the run without the spike rule.

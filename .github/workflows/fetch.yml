@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "dry = 3 coins, 8 development-period days, prints counts only; full = the one-off fetch (commits data and hashes)"
+        description: "preview = real coin selection and Kraken mapping, writes nothing; dry = 3 coins, 8 development-period days, prints counts only; full = the one-off fetch (commits data and hashes)"
         required: true
         default: dry
 permissions:
@@ -26,7 +26,7 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "$(git rev-parse "$CODE_TAG^{commit}")" || { echo "HEAD is not $CODE_TAG: refusing to fetch"; exit 1; }
         env:
-          CODE_TAG: code-v1.1
+          CODE_TAG: code-v1.2
       - name: Fetch
         run: node fetch.mjs
         env:
