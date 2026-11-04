@@ -1,0 +1,5 @@
+{
+ "coverage": 0.9980839416058395,
+ "rule": "share of coin-days 2023-11-04..2026-11-03 with >= 22 of 24 hourly candles; >= 0.95 -> hourly realised variance for all coins, otherwise Garman-Klass for all",
+ "target": "hourly"
+}

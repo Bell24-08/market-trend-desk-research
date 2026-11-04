@@ -1,0 +1,1054 @@
+{
+ "rule": "Coinbase only; exclusions first; top 30 by sum of daily volume x close over 2025-08-06..2025-11-03",
+ "exchange": "coinbase",
+ "selected": [
+  {
+   "symbol": "BTC",
+   "product": "BTC-USD",
+   "volumeUSD": 64285911195
+  },
+  {
+   "symbol": "ETH",
+   "product": "ETH-USD",
+   "volumeUSD": 57599123628
+  },
+  {
+   "symbol": "SOL",
+   "product": "SOL-USD",
+   "volumeUSD": 25360542814
+  },
+  {
+   "symbol": "XRP",
+   "product": "XRP-USD",
+   "volumeUSD": 19729180933
+  },
+  {
+   "symbol": "DOGE",
+   "product": "DOGE-USD",
+   "volumeUSD": 6401601268
+  },
+  {
+   "symbol": "LINK",
+   "product": "LINK-USD",
+   "volumeUSD": 4384943224
+  },
+  {
+   "symbol": "SUI",
+   "product": "SUI-USD",
+   "volumeUSD": 4189660841
+  },
+  {
+   "symbol": "ADA",
+   "product": "ADA-USD",
+   "volumeUSD": 3783465625
+  },
+  {
+   "symbol": "HBAR",
+   "product": "HBAR-USD",
+   "volumeUSD": 2892630639
+  },
+  {
+   "symbol": "AVAX",
+   "product": "AVAX-USD",
+   "volumeUSD": 2208039627
+  },
+  {
+   "symbol": "ZEC",
+   "product": "ZEC-USD",
+   "volumeUSD": 2082986624
+  },
+  {
+   "symbol": "LTC",
+   "product": "LTC-USD",
+   "volumeUSD": 1876238973
+  },
+  {
+   "symbol": "XLM",
+   "product": "XLM-USD",
+   "volumeUSD": 1801445859
+  },
+  {
+   "symbol": "CRO",
+   "product": "CRO-USD",
+   "volumeUSD": 1367139202
+  },
+  {
+   "symbol": "AAVE",
+   "product": "AAVE-USD",
+   "volumeUSD": 1046364327
+  },
+  {
+   "symbol": "DOT",
+   "product": "DOT-USD",
+   "volumeUSD": 903718757
+  },
+  {
+   "symbol": "ARB",
+   "product": "ARB-USD",
+   "volumeUSD": 683629709
+  },
+  {
+   "symbol": "SEI",
+   "product": "SEI-USD",
+   "volumeUSD": 666284055
+  },
+  {
+   "symbol": "BCH",
+   "product": "BCH-USD",
+   "volumeUSD": 645667022
+  },
+  {
+   "symbol": "CRV",
+   "product": "CRV-USD",
+   "volumeUSD": 642779724
+  },
+  {
+   "symbol": "SHIB",
+   "product": "SHIB-USD",
+   "volumeUSD": 501866573
+  },
+  {
+   "symbol": "UNI",
+   "product": "UNI-USD",
+   "volumeUSD": 440256762
+  },
+  {
+   "symbol": "FET",
+   "product": "FET-USD",
+   "volumeUSD": 423664352
+  },
+  {
+   "symbol": "NEAR",
+   "product": "NEAR-USD",
+   "volumeUSD": 418926098
+  },
+  {
+   "symbol": "DASH",
+   "product": "DASH-USD",
+   "volumeUSD": 373581987
+  },
+  {
+   "symbol": "ICP",
+   "product": "ICP-USD",
+   "volumeUSD": 364248003
+  },
+  {
+   "symbol": "INJ",
+   "product": "INJ-USD",
+   "volumeUSD": 335842136
+  },
+  {
+   "symbol": "ALGO",
+   "product": "ALGO-USD",
+   "volumeUSD": 327108492
+  },
+  {
+   "symbol": "XCN",
+   "product": "XCN-USD",
+   "volumeUSD": 308958804
+  },
+  {
+   "symbol": "LDO",
+   "product": "LDO-USD",
+   "volumeUSD": 266504773
+  }
+ ],
+ "excluded": [
+  {
+   "symbol": "YB",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TRUST",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "USDT",
+   "reason": "stablecoin"
+  },
+  {
+   "symbol": "ZK",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ERA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "HYPE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SWELL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BASECAT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SQD",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "THQ",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RLS",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "GIGA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "AWE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PLUME",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ALLO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ZORA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WIF",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BOBBOB",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PROVE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RECALL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "KMNO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BNB",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "NEON",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TON",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "FLOCK",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ZKP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "LA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SIGN",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "W",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BARD",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ZRO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "HYPER",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "AVNT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "NOM",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "NOICE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ATH",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "EDGEX",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "KTA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SKR",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WET",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "IRYS",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "KAIO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "NEX",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MPLX",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SPK",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "EDGE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SAPIEN",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PENDLE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PROMPT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "VIRTUAL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "FLOKI",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "CLANKER",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "META",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "CBETH",
+   "reason": "wrapped_or_liquid_staking"
+  },
+  {
+   "symbol": "CFG",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "OPN",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ENA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MOODENG",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MEGA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RAVE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "CORECHAIN",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DOLO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "CAKE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MEZO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PRL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "FUN1",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BNKR",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WLD",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "VVV",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TOWNS",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ROBO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MANTLE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PENGU",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RITUAL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "AXIS",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BILL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "COOKIE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SYRUP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "EUL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "UP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "STRK",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "LINEA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "LRDS",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MSOL",
+   "reason": "wrapped_or_liquid_staking"
+  },
+  {
+   "symbol": "JUPITER",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "APR",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BONK",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "KEYCAT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WELL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PAX",
+   "reason": "stablecoin"
+  },
+  {
+   "symbol": "GEOD",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "REZ",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "FIGHT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TRIA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "KERNEL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ONDO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "G",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ALT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "CHECK",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ZETA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "KAT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SHDW",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "KAITO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ARX",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WHUF",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ME",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ALIGN",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MORPHO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PROS",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BIRB",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ZAMA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DRIFT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "L3",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RNBW",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "AZTEC",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DRV",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "JTO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MET",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SKY",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PEPE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DATA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "HONEY",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PONS",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "CAP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PUMP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SYND",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "KARRAT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "FAI",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TREE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TRUMP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "GRVT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "GROVE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ESP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DIEM",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TROLL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "LIGHTER",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "LMTS",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BLEND",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "FLUID",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RAY",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WLFI",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RED",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ELSA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WCT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "AERO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TURBO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TNSR",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DRB",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "OPG",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SD",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "AKT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "CTR",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TAO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ALEO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BIO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "USDS",
+   "reason": "stablecoin"
+  },
+  {
+   "symbol": "BREV",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "HOME",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PNUT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "S",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DOOD",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BERA",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BASED1",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DEGEN",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SUP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WMTX",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "O",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "IMU",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ICNT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ZETACHAIN",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ARKM",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "2Z",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "POL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MOG",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "INX",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "KITE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MAMO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "COSMOSDYDX",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "USD1",
+   "reason": "stablecoin"
+  },
+  {
+   "symbol": "ZKC",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "GWEI",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "COW",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PYTH",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DEEP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WAXL",
+   "reason": "wrapped_or_liquid_staking"
+  },
+  {
+   "symbol": "PRCL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WRON",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "EIGEN",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "GRASS",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "CP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "FARTCOIN",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SXT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "AI",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "PAXG",
+   "reason": "gold_backed"
+  },
+  {
+   "symbol": "LAYER",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RENDER",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "B3",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "STABLE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DOGINME",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "MON",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "WAL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "JITOSOL",
+   "reason": "wrapped_or_liquid_staking"
+  },
+  {
+   "symbol": "SENT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "USELESS",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RSC",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "A8",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "DBR",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "XAN",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BLUECHIP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "CHIP",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "LSETH",
+   "reason": "wrapped_or_liquid_staking"
+  },
+  {
+   "symbol": "SAFE",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ASTER",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "RSR",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "ETHFI",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "NEWT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "TOSHI",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "POPCAT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "XPL",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "SPX",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "CT",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "IO",
+   "reason": "first daily candle after 2023-11-03"
+  },
+  {
+   "symbol": "BEAM",
+   "reason": "first daily candle after 2023-11-03"
+  }
+ ]
+}

@@ -1,0 +1,318 @@
+Mode full. 2026-11-04T09:47:27.542Z
+Active Coinbase USD pairs: 404
+Code version (GITHUB_SHA): b5bb36aa43891c3d80db51916c8bddf170f5ee9f
+excluded YB: first daily candle after 2023-11-03
+excluded TRUST: first daily candle after 2023-11-03
+excluded USDT: stablecoin
+excluded ZK: first daily candle after 2023-11-03
+excluded ERA: first daily candle after 2023-11-03
+excluded HYPE: first daily candle after 2023-11-03
+excluded SWELL: first daily candle after 2023-11-03
+excluded BASECAT: first daily candle after 2023-11-03
+excluded SQD: first daily candle after 2023-11-03
+excluded THQ: first daily candle after 2023-11-03
+excluded RLS: first daily candle after 2023-11-03
+excluded GIGA: first daily candle after 2023-11-03
+excluded AWE: first daily candle after 2023-11-03
+excluded PLUME: first daily candle after 2023-11-03
+excluded ALLO: first daily candle after 2023-11-03
+excluded ZORA: first daily candle after 2023-11-03
+excluded WIF: first daily candle after 2023-11-03
+excluded BOBBOB: first daily candle after 2023-11-03
+excluded PROVE: first daily candle after 2023-11-03
+excluded RECALL: first daily candle after 2023-11-03
+excluded KMNO: first daily candle after 2023-11-03
+excluded BNB: first daily candle after 2023-11-03
+excluded NEON: first daily candle after 2023-11-03
+excluded TON: first daily candle after 2023-11-03
+excluded FLOCK: first daily candle after 2023-11-03
+excluded ZKP: first daily candle after 2023-11-03
+excluded LA: first daily candle after 2023-11-03
+excluded SIGN: first daily candle after 2023-11-03
+excluded W: first daily candle after 2023-11-03
+excluded BARD: first daily candle after 2023-11-03
+excluded ZRO: first daily candle after 2023-11-03
+excluded HYPER: first daily candle after 2023-11-03
+excluded AVNT: first daily candle after 2023-11-03
+excluded NOM: first daily candle after 2023-11-03
+excluded NOICE: first daily candle after 2023-11-03
+excluded ATH: first daily candle after 2023-11-03
+excluded EDGEX: first daily candle after 2023-11-03
+excluded KTA: first daily candle after 2023-11-03
+excluded SKR: first daily candle after 2023-11-03
+excluded WET: first daily candle after 2023-11-03
+excluded IRYS: first daily candle after 2023-11-03
+excluded KAIO: first daily candle after 2023-11-03
+excluded NEX: first daily candle after 2023-11-03
+excluded MPLX: first daily candle after 2023-11-03
+excluded SPK: first daily candle after 2023-11-03
+excluded EDGE: first daily candle after 2023-11-03
+excluded SAPIEN: first daily candle after 2023-11-03
+excluded PENDLE: first daily candle after 2023-11-03
+excluded PROMPT: first daily candle after 2023-11-03
+excluded VIRTUAL: first daily candle after 2023-11-03
+excluded FLOKI: first daily candle after 2023-11-03
+excluded CLANKER: first daily candle after 2023-11-03
+excluded META: first daily candle after 2023-11-03
+excluded CBETH: wrapped_or_liquid_staking
+excluded CFG: first daily candle after 2023-11-03
+excluded OPN: first daily candle after 2023-11-03
+excluded ENA: first daily candle after 2023-11-03
+excluded MOODENG: first daily candle after 2023-11-03
+excluded MEGA: first daily candle after 2023-11-03
+excluded RAVE: first daily candle after 2023-11-03
+excluded CORECHAIN: first daily candle after 2023-11-03
+excluded DOLO: first daily candle after 2023-11-03
+excluded CAKE: first daily candle after 2023-11-03
+excluded MEZO: first daily candle after 2023-11-03
+excluded PRL: first daily candle after 2023-11-03
+excluded FUN1: first daily candle after 2023-11-03
+excluded BNKR: first daily candle after 2023-11-03
+excluded WLD: first daily candle after 2023-11-03
+excluded VVV: first daily candle after 2023-11-03
+excluded TOWNS: first daily candle after 2023-11-03
+excluded ROBO: first daily candle after 2023-11-03
+excluded MANTLE: first daily candle after 2023-11-03
+excluded PENGU: first daily candle after 2023-11-03
+excluded RITUAL: first daily candle after 2023-11-03
+excluded AXIS: first daily candle after 2023-11-03
+excluded BILL: first daily candle after 2023-11-03
+excluded COOKIE: first daily candle after 2023-11-03
+excluded SYRUP: first daily candle after 2023-11-03
+excluded EUL: first daily candle after 2023-11-03
+excluded UP: first daily candle after 2023-11-03
+excluded STRK: first daily candle after 2023-11-03
+excluded LINEA: first daily candle after 2023-11-03
+excluded LRDS: first daily candle after 2023-11-03
+excluded MSOL: wrapped_or_liquid_staking
+excluded JUPITER: first daily candle after 2023-11-03
+excluded APR: first daily candle after 2023-11-03
+excluded BONK: first daily candle after 2023-11-03
+excluded KEYCAT: first daily candle after 2023-11-03
+excluded WELL: first daily candle after 2023-11-03
+excluded PAX: stablecoin
+excluded GEOD: first daily candle after 2023-11-03
+excluded REZ: first daily candle after 2023-11-03
+excluded FIGHT: first daily candle after 2023-11-03
+excluded TRIA: first daily candle after 2023-11-03
+excluded KERNEL: first daily candle after 2023-11-03
+excluded ONDO: first daily candle after 2023-11-03
+excluded G: first daily candle after 2023-11-03
+excluded ALT: first daily candle after 2023-11-03
+excluded CHECK: first daily candle after 2023-11-03
+excluded ZETA: first daily candle after 2023-11-03
+excluded KAT: first daily candle after 2023-11-03
+excluded SHDW: first daily candle after 2023-11-03
+excluded KAITO: first daily candle after 2023-11-03
+excluded ARX: first daily candle after 2023-11-03
+excluded WHUF: first daily candle after 2023-11-03
+excluded ME: first daily candle after 2023-11-03
+excluded ALIGN: first daily candle after 2023-11-03
+excluded MORPHO: first daily candle after 2023-11-03
+excluded PROS: first daily candle after 2023-11-03
+excluded BIRB: first daily candle after 2023-11-03
+excluded ZAMA: first daily candle after 2023-11-03
+excluded DRIFT: first daily candle after 2023-11-03
+excluded L3: first daily candle after 2023-11-03
+excluded RNBW: first daily candle after 2023-11-03
+excluded AZTEC: first daily candle after 2023-11-03
+excluded DRV: first daily candle after 2023-11-03
+excluded JTO: first daily candle after 2023-11-03
+excluded MET: first daily candle after 2023-11-03
+excluded SKY: first daily candle after 2023-11-03
+excluded PEPE: first daily candle after 2023-11-03
+excluded DATA: first daily candle after 2023-11-03
+excluded HONEY: first daily candle after 2023-11-03
+excluded PONS: first daily candle after 2023-11-03
+excluded CAP: first daily candle after 2023-11-03
+excluded PUMP: first daily candle after 2023-11-03
+excluded SYND: first daily candle after 2023-11-03
+excluded KARRAT: first daily candle after 2023-11-03
+excluded FAI: first daily candle after 2023-11-03
+excluded TREE: first daily candle after 2023-11-03
+excluded TRUMP: first daily candle after 2023-11-03
+excluded GRVT: first daily candle after 2023-11-03
+excluded GROVE: first daily candle after 2023-11-03
+excluded ESP: first daily candle after 2023-11-03
+excluded DIEM: first daily candle after 2023-11-03
+excluded TROLL: first daily candle after 2023-11-03
+excluded LIGHTER: first daily candle after 2023-11-03
+excluded LMTS: first daily candle after 2023-11-03
+excluded BLEND: first daily candle after 2023-11-03
+excluded FLUID: first daily candle after 2023-11-03
+excluded RAY: first daily candle after 2023-11-03
+excluded WLFI: first daily candle after 2023-11-03
+excluded RED: first daily candle after 2023-11-03
+excluded ELSA: first daily candle after 2023-11-03
+excluded WCT: first daily candle after 2023-11-03
+excluded AERO: first daily candle after 2023-11-03
+excluded TURBO: first daily candle after 2023-11-03
+excluded TNSR: first daily candle after 2023-11-03
+excluded DRB: first daily candle after 2023-11-03
+excluded OPG: first daily candle after 2023-11-03
+excluded SD: first daily candle after 2023-11-03
+excluded AKT: first daily candle after 2023-11-03
+excluded CTR: first daily candle after 2023-11-03
+excluded TAO: first daily candle after 2023-11-03
+excluded ALEO: first daily candle after 2023-11-03
+excluded BIO: first daily candle after 2023-11-03
+excluded USDS: stablecoin
+excluded BREV: first daily candle after 2023-11-03
+excluded HOME: first daily candle after 2023-11-03
+excluded RE: first daily candle after 2023-11-03
+excluded PNUT: first daily candle after 2023-11-03
+excluded S: first daily candle after 2023-11-03
+excluded DOOD: first daily candle after 2023-11-03
+excluded BERA: first daily candle after 2023-11-03
+excluded BASED1: first daily candle after 2023-11-03
+excluded DEGEN: first daily candle after 2023-11-03
+excluded SUP: first daily candle after 2023-11-03
+excluded WMTX: first daily candle after 2023-11-03
+excluded O: first daily candle after 2023-11-03
+excluded IMU: first daily candle after 2023-11-03
+excluded ICNT: first daily candle after 2023-11-03
+excluded ZETACHAIN: first daily candle after 2023-11-03
+excluded ARKM: first daily candle after 2023-11-03
+excluded 2Z: first daily candle after 2023-11-03
+excluded POL: first daily candle after 2023-11-03
+excluded MOG: first daily candle after 2023-11-03
+excluded INX: first daily candle after 2023-11-03
+excluded KITE: first daily candle after 2023-11-03
+excluded MAMO: first daily candle after 2023-11-03
+excluded COSMOSDYDX: first daily candle after 2023-11-03
+excluded USD1: stablecoin
+excluded ZKC: first daily candle after 2023-11-03
+excluded GWEI: first daily candle after 2023-11-03
+excluded COW: first daily candle after 2023-11-03
+excluded PYTH: first daily candle after 2023-11-03
+excluded DEEP: first daily candle after 2023-11-03
+excluded WAXL: wrapped_or_liquid_staking
+excluded PRCL: first daily candle after 2023-11-03
+excluded WRON: first daily candle after 2023-11-03
+excluded EIGEN: first daily candle after 2023-11-03
+excluded GRASS: first daily candle after 2023-11-03
+excluded CP: first daily candle after 2023-11-03
+excluded FARTCOIN: first daily candle after 2023-11-03
+excluded SXT: first daily candle after 2023-11-03
+excluded AI: first daily candle after 2023-11-03
+excluded PAXG: gold_backed
+excluded LAYER: first daily candle after 2023-11-03
+excluded RENDER: first daily candle after 2023-11-03
+excluded B3: first daily candle after 2023-11-03
+excluded STABLE: first daily candle after 2023-11-03
+excluded DOGINME: first daily candle after 2023-11-03
+excluded MON: first daily candle after 2023-11-03
+excluded WAL: first daily candle after 2023-11-03
+excluded JITOSOL: wrapped_or_liquid_staking
+excluded SENT: first daily candle after 2023-11-03
+excluded USELESS: first daily candle after 2023-11-03
+excluded RSC: first daily candle after 2023-11-03
+excluded A8: first daily candle after 2023-11-03
+excluded DBR: first daily candle after 2023-11-03
+excluded XAN: first daily candle after 2023-11-03
+excluded BLUECHIP: first daily candle after 2023-11-03
+excluded CHIP: first daily candle after 2023-11-03
+excluded LSETH: wrapped_or_liquid_staking
+excluded SAFE: first daily candle after 2023-11-03
+excluded ASTER: first daily candle after 2023-11-03
+excluded RSR: first daily candle after 2023-11-03
+excluded ETHFI: first daily candle after 2023-11-03
+excluded NEWT: first daily candle after 2023-11-03
+excluded TOSHI: first daily candle after 2023-11-03
+excluded POPCAT: first daily candle after 2023-11-03
+excluded XPL: first daily candle after 2023-11-03
+excluded SPX: first daily candle after 2023-11-03
+excluded CT: first daily candle after 2023-11-03
+excluded IO: first daily candle after 2023-11-03
+excluded BEAM: first daily candle after 2023-11-03
+Excluded 224; eligible 180; selected 30
+selected BTC: USD volume 64285911195
+selected ETH: USD volume 57599123628
+selected SOL: USD volume 25360542814
+selected XRP: USD volume 19729180933
+selected DOGE: USD volume 6401601268
+selected LINK: USD volume 4384943224
+selected SUI: USD volume 4189660841
+selected ADA: USD volume 3783465625
+selected HBAR: USD volume 2892630639
+selected AVAX: USD volume 2208039627
+selected ZEC: USD volume 2082986624
+selected LTC: USD volume 1876238973
+selected XLM: USD volume 1801445859
+selected CRO: USD volume 1367139202
+selected AAVE: USD volume 1046364327
+selected DOT: USD volume 903718757
+selected ARB: USD volume 683629709
+selected SEI: USD volume 666284055
+selected BCH: USD volume 645667022
+selected CRV: USD volume 642779724
+selected SHIB: USD volume 501866573
+selected UNI: USD volume 440256762
+selected FET: USD volume 423664352
+selected NEAR: USD volume 418926098
+selected DASH: USD volume 373581987
+selected ICP: USD volume 364248003
+selected INJ: USD volume 335842136
+selected ALGO: USD volume 327108492
+selected XCN: USD volume 308958804
+selected LDO: USD volume 266504773
+Kraken BTC: 720 candles (pair XXBTZUSD)
+fetched BTC
+Kraken ETH: 720 candles (pair XETHZUSD)
+fetched ETH
+Kraken SOL: 720 candles (pair SOLUSD)
+fetched SOL
+Kraken XRP: 720 candles (pair XXRPZUSD)
+fetched XRP
+Kraken DOGE: 720 candles (pair XDGUSD)
+fetched DOGE
+Kraken LINK: 720 candles (pair LINKUSD)
+fetched LINK
+Kraken SUI: 720 candles (pair SUIUSD)
+fetched SUI
+Kraken ADA: 720 candles (pair ADAUSD)
+fetched ADA
+Kraken HBAR: 482 candles (pair HBARUSD)
+fetched HBAR
+Kraken AVAX: 720 candles (pair AVAXUSD)
+fetched AVAX
+Kraken ZEC: 720 candles (pair XZECZUSD)
+fetched ZEC
+Kraken LTC: 720 candles (pair XLTCZUSD)
+fetched LTC
+Kraken XLM: 720 candles (pair XXLMZUSD)
+fetched XLM
+Kraken CRO: 644 candles (pair CROUSD)
+fetched CRO
+Kraken AAVE: 720 candles (pair AAVEUSD)
+fetched AAVE
+Kraken DOT: 720 candles (pair DOTUSD)
+fetched DOT
+Kraken ARB: 720 candles (pair ARBUSD)
+fetched ARB
+Kraken SEI: 720 candles (pair SEIUSD)
+fetched SEI
+Kraken BCH: 720 candles (pair BCHUSD)
+fetched BCH
+Kraken CRV: 720 candles (pair CRVUSD)
+fetched CRV
+Kraken SHIB: 720 candles (pair SHIBUSD)
+fetched SHIB
+Kraken UNI: 720 candles (pair UNIUSD)
+fetched UNI
+Kraken FET: 720 candles (pair FETUSD)
+fetched FET
+Kraken NEAR: 720 candles (pair NEARUSD)
+fetched NEAR
+Kraken DASH: 720 candles (pair DASHUSD)
+fetched DASH
+Kraken ICP: 720 candles (pair ICPUSD)
+fetched ICP
+Kraken INJ: 720 candles (pair INJUSD)
+fetched INJ
+Kraken ALGO: 720 candles (pair ALGOUSD)
+fetched ALGO
+Kraken XCN: 720 candles (pair XCNUSD)
+fetched XCN
+Kraken LDO: 720 candles (pair LDOUSD)
+fetched LDO
