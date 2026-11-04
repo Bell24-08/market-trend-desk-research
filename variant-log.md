@@ -38,3 +38,21 @@ Distinct strategies so far: 18 (plus the design choices above). Earlier I said "
 - Changing any parameter after seeing a result = a new variant.
 - Gold-related variants go in the gold thread's log, not here.
 - Direction tests have already used the whole history up to 2026-10-30. There is no clean historical hold-out for direction; only the forward logger can confirm it.
+
+## Volatility test (pre-registered, preregistration-volatility-v1.0.md)
+
+Counted separately from the direction variants above. None of these were chosen after seeing results.
+
+| # | Variant | Status |
+| --- | --- | --- |
+| V1 | HAR on log hourly realised variance (windows 1, 7, 30 days), expanding window, 30-day refits: **primary claim** | pre-registered |
+| V2 | 30-day mean baseline | pre-registered |
+| V3 | EWMA lambda 0.94 | pre-registered, secondary, never decides |
+| V4 | Parkinson-variance robustness run | pre-registered, reported only |
+| V5 | Run without the spike rule | pre-registered, reported only |
+
+Code corrections made before the locked year was opened (not new strategies):
+- code-v1.1: removed the leveraged-token name pattern, zero-range void in hourly mode, single locked call (found in review, before any data existed).
+- code-v1.4: the spike rule's Kraken median now needs at least 24 of the previous 30 days. Found in the first development run (code-v1.3, commit a219e74): 6 days at the very start of Kraken's data were voided although Kraken confirmed the moves. Fixes the code to match the pre-registered rule; affects only the early development period. Second development run: commit ac96837.
+
+The "new variant" rule applies to any change made after the locked year is opened.
