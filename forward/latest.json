@@ -1,0 +1,337 @@
+{
+ "as_of": "2026-11-06",
+ "made_at": "2026-11-07T06:21:51.357Z",
+ "version": "forward-v1.0",
+ "coins": {
+  "BTC": {
+   "daily": {
+    "variance": 0.0003901324727720588,
+    "typical_move": 0.019751771383145836
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.0030570061152895987,
+    "typical_move": 0.05529019908889458
+   }
+  },
+  "ETH": {
+   "daily": {
+    "variance": 0.0006105300021733005,
+    "typical_move": 0.024708905321225796
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.005589740483488807,
+    "typical_move": 0.0747645670320427
+   }
+  },
+  "SOL": {
+   "daily": {
+    "variance": 0.0008202196562644738,
+    "typical_move": 0.028639477234483065
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.006987478938593017,
+    "typical_move": 0.08359114150789554
+   }
+  },
+  "XRP": {
+   "daily": {
+    "variance": 0.0009502528403532002,
+    "typical_move": 0.030826171354114026
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.00792111720394777,
+    "typical_move": 0.0890006584467091
+   }
+  },
+  "DOGE": {
+   "daily": {
+    "variance": 0.0008378065117336187,
+    "typical_move": 0.02894488748870202
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.007945809239227778,
+    "typical_move": 0.08913926878333576
+   }
+  },
+  "LINK": {
+   "daily": {
+    "variance": 0.0012960629858806514,
+    "typical_move": 0.03600087479326928
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.01011150813446114,
+    "typical_move": 0.1005559950199944
+   }
+  },
+  "SUI": {
+   "daily": {
+    "variance": 0.0014458572287481513,
+    "typical_move": 0.03802442936781762
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.012550507139926762,
+    "typical_move": 0.11202904596544042
+   }
+  },
+  "ADA": {
+   "daily": {
+    "variance": 0.0013398193901080324,
+    "typical_move": 0.0366035434091842
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.011403088859307,
+    "typical_move": 0.1067852464496243
+   }
+  },
+  "HBAR": {
+   "daily": {
+    "variance": 0.0010141082369613881,
+    "typical_move": 0.031845066132155986
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.009357403326732912,
+    "typical_move": 0.09673367214539574
+   }
+  },
+  "AVAX": {
+   "daily": {
+    "variance": 0.0011972915360938766,
+    "typical_move": 0.03460190075839587
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.010426965694326525,
+    "typical_move": 0.10211251487612341
+   }
+  },
+  "ZEC": {
+   "daily": {
+    "variance": 0.0041948938228351575,
+    "typical_move": 0.06476799999100757
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.028753144459571015,
+    "typical_move": 0.16956752183001028
+   }
+  },
+  "LTC": {
+   "daily": {
+    "variance": 0.0009118850093836828,
+    "typical_move": 0.03019743382116571
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.007782208125351234,
+    "typical_move": 0.0882168245027627
+   }
+  },
+  "XLM": {
+   "daily": {
+    "variance": 0.0011795829367923184,
+    "typical_move": 0.03434505694845065
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.009696284683740102,
+    "typical_move": 0.09846971455092221
+   }
+  },
+  "CRO": {
+   "daily": {
+    "variance": 0.0009229737910900971,
+    "typical_move": 0.03038048372047583
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.008740113538665325,
+    "typical_move": 0.0934885743749755
+   }
+  },
+  "AAVE": {
+   "daily": {
+    "variance": 0.0017771007700250684,
+    "typical_move": 0.04215567304675693
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.014444213341962176,
+    "typical_move": 0.12018408106717868
+   }
+  },
+  "DOT": {
+   "daily": {
+    "variance": 0.0013063330528362868,
+    "typical_move": 0.03614322969570216
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.011792068792544267,
+    "typical_move": 0.10859129243426596
+   }
+  },
+  "ARB": {
+   "daily": {
+    "variance": 0.0027793829296389465,
+    "typical_move": 0.05271985327785868
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.020421795232521543,
+    "typical_move": 0.14290484677757276
+   }
+  },
+  "SEI": {
+   "daily": {
+    "variance": 0.0016666267906123,
+    "typical_move": 0.0408243406635343
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.014891730819735494,
+    "typical_move": 0.12203167957434452
+   }
+  },
+  "BCH": {
+   "daily": {
+    "variance": 0.0017672866979287862,
+    "typical_move": 0.042039109147658994
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.012601214771725454,
+    "typical_move": 0.1122551324961378
+   }
+  },
+  "CRV": {
+   "daily": {
+    "variance": 0.0019642749073182446,
+    "typical_move": 0.04432014110219241
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.016677173535217044,
+    "typical_move": 0.12914013138918917
+   }
+  },
+  "SHIB": {
+   "daily": {
+    "variance": 0.001012004347434605,
+    "typical_move": 0.03181201577131831
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.009252503723704501,
+    "typical_move": 0.09618993566743093
+   }
+  },
+  "UNI": {
+   "daily": {
+    "variance": 0.0023706896658483214,
+    "typical_move": 0.048689728545642165
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.01874416606904233,
+    "typical_move": 0.13690933521510623
+   }
+  },
+  "FET": {
+   "daily": {
+    "variance": 0.0017049567888412771,
+    "typical_move": 0.04129112239745097
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.015374305483207439,
+    "typical_move": 0.12399316708273661
+   }
+  },
+  "NEAR": {
+   "daily": {
+    "variance": 0.002605245632135488,
+    "typical_move": 0.05104160687258472
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.020421246800508337,
+    "typical_move": 0.1429029278934072
+   }
+  },
+  "DASH": {
+   "daily": {
+    "variance": 0.002843665267471372,
+    "typical_move": 0.053326028048893456
+   },
+   "trend": "mixed",
+   "weekly": {
+    "variance": 0.021160161660016417,
+    "typical_move": 0.1454653280339216
+   }
+  },
+  "ICP": {
+   "daily": {
+    "variance": 0.0014716346839817739,
+    "typical_move": 0.03836189103761406
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.01277973568170359,
+    "typical_move": 0.11304749303590765
+   }
+  },
+  "INJ": {
+   "daily": {
+    "variance": 0.0029869471704361155,
+    "typical_move": 0.054652970371573725
+   },
+   "trend": "up",
+   "weekly": {
+    "variance": 0.02291278136471383,
+    "typical_move": 0.1513696844309118
+   }
+  },
+  "ALGO": {
+   "daily": {
+    "variance": 0.0020335683130485224,
+    "typical_move": 0.04509510298301272
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.015255868618549218,
+    "typical_move": 0.12351464940868033
+   }
+  },
+  "XCN": {
+   "daily": {
+    "variance": 0.002121694253040946,
+    "typical_move": 0.04606185247079134
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.026283857663147735,
+    "typical_move": 0.16212297080656934
+   }
+  },
+  "LDO": {
+   "daily": {
+    "variance": 0.001974639388637282,
+    "typical_move": 0.04443691470655092
+   },
+   "trend": "down",
+   "weekly": {
+    "variance": 0.017872907076011052,
+    "typical_move": 0.13368959225014881
+   }
+  }
+ }
+}

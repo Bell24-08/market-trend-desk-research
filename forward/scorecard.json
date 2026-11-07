@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-06",
+ "as_of": "2026-11-07",
  "horizons": {
   "1": {
    "scored": 0
@@ -8,8 +8,8 @@
    "scored": 0
   }
  },
- "predictions_made": 0,
- "forecast_days": 0,
+ "predictions_made": 60,
+ "forecast_days": 1,
  "voided_scores": 0,
  "ranges": {
   "1": {
@@ -19,7 +19,7 @@
    "scored": 0
   }
  },
- "range_rows": 0,
+ "range_rows": 60,
  "range_gaps": 0,
  "missed_forecast_days": []
 }
