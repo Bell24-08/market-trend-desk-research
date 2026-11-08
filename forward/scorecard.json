@@ -1,25 +1,35 @@
 {
- "as_of": "2026-11-07",
+ "as_of": "2026-11-08",
  "horizons": {
   "1": {
-   "scored": 0
+   "scored": 30,
+   "days": 1,
+   "improvement": 0.15257491138750068,
+   "dm_t": 1.1123064990051768e+149,
+   "dm_p": 0,
+   "coins_better": 24,
+   "coins_scored": 30,
+   "forecast_to_realised": 3.1225165333028353
   },
   "7": {
    "scored": 0
   }
  },
- "predictions_made": 60,
- "forecast_days": 1,
+ "predictions_made": 120,
+ "forecast_days": 2,
  "voided_scores": 0,
  "ranges": {
   "1": {
-   "scored": 0
+   "scored": 30,
+   "coverage": 1,
+   "below": 0,
+   "above": 0
   },
   "7": {
    "scored": 0
   }
  },
- "range_rows": 60,
+ "range_rows": 120,
  "range_gaps": 0,
  "missed_forecast_days": []
 }
