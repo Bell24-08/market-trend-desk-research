@@ -1,45 +1,45 @@
 {
- "as_of": "2026-11-23",
+ "as_of": "2026-11-24",
  "horizons": {
   "1": {
-   "scored": 480,
-   "days": 16,
-   "improvement": 0.19158437749334034,
-   "dm_t": 1.5426650468371532,
-   "dm_p": 0.06145605049798886,
+   "scored": 510,
+   "days": 17,
+   "improvement": 0.16851487407561305,
+   "dm_t": 1.4882548276396113,
+   "dm_p": 0.06834188450669887,
    "coins_better": 25,
    "coins_scored": 30,
-   "forecast_to_realised": 0.9703584522568864
+   "forecast_to_realised": 0.9217733991633523
   },
   "7": {
-   "scored": 300,
-   "days": 10,
-   "improvement": 0.5161262777253768,
-   "dm_t": 3.68091930668455,
-   "dm_p": 0.00011622892451434996,
-   "coins_better": 24,
+   "scored": 330,
+   "days": 11,
+   "improvement": 0.5297954022697486,
+   "dm_t": 3.9517484026898746,
+   "dm_p": 0.0000388079481529191,
+   "coins_better": 25,
    "coins_scored": 30,
-   "forecast_to_realised": 0.9197394345390821
+   "forecast_to_realised": 0.9248114593126276
   }
  },
- "predictions_made": 1020,
- "forecast_days": 17,
+ "predictions_made": 1080,
+ "forecast_days": 18,
  "voided_scores": 0,
  "ranges": {
   "1": {
-   "scored": 480,
-   "coverage": 0.85625,
-   "below": 0.1375,
-   "above": 0.00625
+   "scored": 510,
+   "coverage": 0.8627450980392157,
+   "below": 0.12941176470588237,
+   "above": 0.00784313725490196
   },
   "7": {
-   "scored": 300,
-   "coverage": 0.6066666666666667,
-   "below": 0.3933333333333333,
+   "scored": 330,
+   "coverage": 0.6363636363636364,
+   "below": 0.36363636363636365,
    "above": 0
   }
  },
- "range_rows": 1020,
+ "range_rows": 1080,
  "range_gaps": 0,
  "missed_forecast_days": []
 }
